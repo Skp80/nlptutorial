@@ -1,0 +1,207 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled",
+      "provenance": [],
+      "authorship_tag": "ABX9TyOuivpkTlpedvqt+6tk421U",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Skp80/nlptutorial/blob/master/2.0%20Understanding%20different%20Loss%20Functions%20in%20Keras\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "Y3UD5MD0VK71",
+        "colab_type": "text"
+      },
+      "source": [
+        "# **How to Develop Deep Learning Models With Keras**\n",
+        "\n",
+        "## The 5-Step Model Life-Cycle\n",
+        "\n",
+        "\n",
+        "1.   Define the model.\n",
+        "2.   Compile the model.\n",
+        "1.   Fit the model.\n",
+        "2.   Evaluate the model.\n",
+        "1.   Make predictions.\n",
+        "\n",
+        "Lets take a closer look at the each of the item\n",
+        "\n",
+        "### 1. Define the Model\n",
+        "Defining the model requires that you first select the type of model that you need and then choose the architecture or network topology.\n",
+        "\n",
+        "From an API perspective, this involves defining the layers of the model, configuring each layer with a number of nodes and activation function, and connecting the layers together into a cohesive model.\n",
+        "\n",
+        "Models can be defined either with the **Sequential API** or **the Functional API**, and we will take a look at this in the next section.\n",
+        "\n",
+        "### 2. Compile the Model\n",
+        "Compiling the model requires that you first select a [loss function](https://en.wikipedia.org/wiki/Loss_function) that you want to optimize, such as mean squared error or cross-entropy.\n",
+        "It also requires that you select an algorithm to perform the optimization procedure, typically [stochastic gradient descent](https://en.wikipedia.org/wiki/Stochastic_gradient_descent), or a modern variation, such as Adam. It may also require that you select any performance metrics to keep track of during the model training process.\n",
+        "\n",
+        "From an API Perspective, this involves calling a function to compile the model with the chosen configuration, which will prepare the appropriate data structures required for the efficient use of the model you have defined.\n",
+        "\n",
+        "The optimizer can be specified as a string for a known optimizer class, e.g. ‘sgd‘ for stochastic gradient descent, or you can configure an instance of an optimizer class and use that.\n",
+        "\n",
+        "For the list of Optimizers please refer to:\n",
+        "\n",
+        "[tf.keras.optimizers](https://keras.io/optimizers/)\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "z3q05yBGaSRe",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "## Compile the model\n",
+        "from keras import sequential\n",
+        "\n",
+        "# compile the model\n",
+        "opt = SGD(learning_rate=0.01, momentum=0.9)\n",
+        "model.compile(optimizer=opt, loss='binary_crossentropy')"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "RdmCaq2dauXC",
+        "colab_type": "text"
+      },
+      "source": [
+        "There are different loss functions. These are:\n",
+        "\n",
+        "\n",
+        "*   '**Binary cross Entropy**' for [Binary Classification](https://en.wikipedia.org/wiki/Evaluation_of_binary_classifiers)\n",
+        "*   '**sparse_categorical_crossentropy**' for multi-class classification.\n",
+        "\n",
+        "\n",
+        "*   '**mse**' - Mean Squared error for Regression\n",
+        "\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "Ud360WAKbczK",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "# compile the model\n",
+        "model.compile(optimizer='sgd', loss='mse')"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "lNN5fwJibfOK",
+        "colab_type": "text"
+      },
+      "source": [
+        "A loss function (or objective function, or optimization score function) is one of the two parameters required to compile a model:\n",
+        "\n",
+        "Below are the different loss functions and their commands in Keras:"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "xLGr1S0ZcMi6",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "## Mean Squared Error:\n",
+        "keras.losses.mean_squared_error(y_true, y_pred)\n",
+        "\n",
+        "## y_true: True labels. TensorFlow/Theano tensor.\n",
+        "## y_pred: Predictions. TensorFlow/Theano tensor of the same shape as y_true.\n",
+        "\n",
+        "\n",
+        "## Mean Absolute Error\n",
+        "keras.losses.mean_absolute_error(y_true, y_pred)\n",
+        "\n",
+        "## Mean_absolute_percentage_error\n",
+        "keras.losses.mean_absolute_percentage_error(y_true, y_pred)\n",
+        "\n",
+        "## Mean_squared_logarithmic_error\n",
+        "keras.losses.mean_squared_logarithmic_error(y_true, y_pred)\n",
+        "\n",
+        "## Squared Hinge\n",
+        "keras.losses.hinge(y_true, y_pred)\n",
+        "\n",
+        "## Categorical Hinge\n",
+        "keras.losses.categorical_hinge(y_true, y_pred)\n",
+        "\n",
+        "## logcosh\n",
+        "keras.losses.logcosh(y_true, y_pred)\n",
+        "\n",
+        "### Note:  Logcosh is Logarithm of the hyperbolic cosine of the prediction error.\n",
+        "\n",
+        "## huber_loss\n",
+        "keras.losses.huber_loss(y_true, y_pred, delta=1.0)\n",
+        "\n",
+        "## Categorical Crossentropy\n",
+        "keras.losses.categorical_crossentropy(y_true, y_pred, from_logits=False, label_smoothing=0)\n",
+        "\n",
+        "## sparse_categorical_crossentropy\n",
+        "keras.losses.sparse_categorical_crossentropy(y_true, y_pred, from_logits=False, axis=-1)\n",
+        "\n",
+        "## binary_crossentropy\n",
+        "keras.losses.binary_crossentropy(y_true, y_pred, from_logits=False, label_smoothing=0)\n",
+        "\n",
+        "\n",
+        "## kullback_leibler_divergence\n",
+        "keras.losses.kullback_leibler_divergence(y_true, y_pred)\n",
+        "\n",
+        "## Poisson\n",
+        "keras.losses.poisson(y_true, y_pred)\n",
+        "\n",
+        "## Cosine Proximity\n",
+        "keras.losses.cosine_proximity(y_true, y_pred, axis=-1)\n",
+        "\n",
+        "## is_categorical_crossentropy\n",
+        "keras.losses.is_categorical_crossentropy(loss)\n",
+        "\n"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    }
+  ]
+}
